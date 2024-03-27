@@ -29,6 +29,43 @@ person2.fullName = function(){
 console.log(person.fullName())
 console.log(person2.fullName())
 
+function myFunction(resolve, reject){
+    reject("Грешка")
+    resolve("Ресултат");
+}
+
+const promise = new Promise(myFunction);
+
+promise.then((result)=>{
+    console.log(result);
+})
+
+promise.catch((error)=>{
+    console.warn(error);
+})
+
+let isLoading = false;
+
+async function asynctFunction(){
+    console.log("Before await");
+    isLoading = true;
+    const result = await new Promise(myFunction);
+    // result do neshto si
+    isLoading = false;
+    return result;
+}
+
+if(isLoading){
+    // show spiner
+}
+else{
+//  show result
+}
+
+asynctFunction().then((result)=>{
+    console.log("This is the result: ", result)
+})
+
 object.x = 5;
 object["ole boje"] = "Mi da"
 
